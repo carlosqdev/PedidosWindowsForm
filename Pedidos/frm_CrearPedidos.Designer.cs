@@ -34,11 +34,11 @@ namespace Pedidos
             this.label2 = new System.Windows.Forms.Label();
             this.comboClientes = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtDireccionEnvio = new System.Windows.Forms.TextBox();
-            this.txtIdDireccion = new System.Windows.Forms.TextBox();
-            this.dgvDirecciones = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
+            this.dgvDirecciones = new System.Windows.Forms.DataGridView();
+            this.txtIdDireccion = new System.Windows.Forms.TextBox();
+            this.txtDireccionEnvio = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAgregarArticulo = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -105,30 +105,14 @@ namespace Pedidos
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Encabezado del pedido";
             // 
-            // label3
+            // label4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 170);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Dirección de envio:";
-            // 
-            // txtDireccionEnvio
-            // 
-            this.txtDireccionEnvio.Location = new System.Drawing.Point(194, 167);
-            this.txtDireccionEnvio.Name = "txtDireccionEnvio";
-            this.txtDireccionEnvio.ReadOnly = true;
-            this.txtDireccionEnvio.Size = new System.Drawing.Size(576, 20);
-            this.txtDireccionEnvio.TabIndex = 5;
-            // 
-            // txtIdDireccion
-            // 
-            this.txtIdDireccion.Location = new System.Drawing.Point(130, 167);
-            this.txtIdDireccion.Name = "txtIdDireccion";
-            this.txtIdDireccion.ReadOnly = true;
-            this.txtIdDireccion.Size = new System.Drawing.Size(58, 20);
-            this.txtIdDireccion.TabIndex = 6;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(303, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(137, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Direcciones del cliente";
             // 
             // dgvDirecciones
             // 
@@ -138,14 +122,30 @@ namespace Pedidos
             this.dgvDirecciones.Size = new System.Drawing.Size(761, 87);
             this.dgvDirecciones.TabIndex = 7;
             // 
-            // label4
+            // txtIdDireccion
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(303, 58);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Direcciones del cliente";
+            this.txtIdDireccion.Location = new System.Drawing.Point(130, 167);
+            this.txtIdDireccion.Name = "txtIdDireccion";
+            this.txtIdDireccion.ReadOnly = true;
+            this.txtIdDireccion.Size = new System.Drawing.Size(58, 20);
+            this.txtIdDireccion.TabIndex = 6;
+            // 
+            // txtDireccionEnvio
+            // 
+            this.txtDireccionEnvio.Location = new System.Drawing.Point(194, 167);
+            this.txtDireccionEnvio.Name = "txtDireccionEnvio";
+            this.txtDireccionEnvio.ReadOnly = true;
+            this.txtDireccionEnvio.Size = new System.Drawing.Size(576, 20);
+            this.txtDireccionEnvio.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 170);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Dirección de envio:";
             // 
             // groupBox2
             // 
@@ -231,6 +231,7 @@ namespace Pedidos
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear pedidos.";
+            this.Load += new System.EventHandler(this.frm_CrearPedidos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDirecciones)).EndInit();
