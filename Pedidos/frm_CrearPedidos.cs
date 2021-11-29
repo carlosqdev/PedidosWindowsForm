@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Pedidos
 {
-    public partial class Form1 : Form
+    public partial class frm_CrearPedidos : Form
     {
-        public Form1()
+        public frm_CrearPedidos()
         {
             InitializeComponent();
         }
