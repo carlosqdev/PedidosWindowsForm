@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbpedidosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="numero_de_articulo" />
+          </Key>
+          <Property Name="numero_de_articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_articulo" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticulosEnFabricas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_fabrica" Type="int" Nullable="false" />
+          <Property Name="numero_de_articulo" Type="int" Nullable="false" />
+          <Property Name="existencia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="numero_de_cliente" />
+          </Key>
+          <Property Name="numero_de_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="saldo" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="limite_de_credito" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="descuento" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetallesDePedidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pedido" Type="int" Nullable="false" />
+          <Property Name="numero_de_articulo" Type="int" Nullable="false" />
+          <Property Name="id_fabrica" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DireccionesClientes">
+          <Key>
+            <PropertyRef Name="id_direccion" />
+          </Key>
+          <Property Name="id_direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero_de_cliente" Type="int" Nullable="false" />
+          <Property Name="calle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="barrio" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="distrito" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fabricas">
+          <Key>
+            <PropertyRef Name="id_fabrica" />
+          </Key>
+          <Property Name="id_fabrica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_fabrica" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="numero_telefono" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero_de_cliente" Type="int" Nullable="false" />
+          <Property Name="id_direccion" Type="int" Nullable="false" />
+          <Property Name="fecha_pedido" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_ArticulosEnFabricas_id_fabrica">
+          <End Role="Fabricas" Type="Self.Fabricas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArticulosEnFabricas" Type="Self.ArticulosEnFabricas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Principal>
+            <Dependent Role="ArticulosEnFabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ArticulosEnFabricas_numero_de_articulo">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArticulosEnFabricas" Type="Self.ArticulosEnFabricas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Principal>
+            <Dependent Role="ArticulosEnFabricas">
+              <PropertyRef Name="numero_de_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_id_fabrica">
+          <End Role="Fabricas" Type="Self.Fabricas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="id_fabrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_id_pedido">
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_numero_de_articulo">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DireccionesClientes_numero_de_cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DireccionesClientes" Type="Self.DireccionesClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Principal>
+            <Dependent Role="DireccionesClientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Pedidos_id_direccion">
+          <End Role="DireccionesClientes" Type="Self.DireccionesClientes" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionesClientes">
+              <PropertyRef Name="id_direccion" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Pedidos_numero_de_cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="numero_de_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbpedidosModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticulosEnFabricas" EntityType="Self.ArticulosEnFabricas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallesDePedidos" EntityType="Self.DetallesDePedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DireccionesClientes" EntityType="Self.DireccionesClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fabricas" EntityType="Self.Fabricas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_ArticulosEnFabricas_id_fabrica" Association="Self.fk_ArticulosEnFabricas_id_fabrica">
+            <End Role="Fabricas" EntitySet="Fabricas" />
+            <End Role="ArticulosEnFabricas" EntitySet="ArticulosEnFabricas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ArticulosEnFabricas_numero_de_articulo" Association="Self.fk_ArticulosEnFabricas_numero_de_articulo">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="ArticulosEnFabricas" EntitySet="ArticulosEnFabricas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_id_fabrica" Association="Self.fk_DetallesDePedidos_id_fabrica">
+            <End Role="Fabricas" EntitySet="Fabricas" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_id_pedido" Association="Self.fk_DetallesDePedidos_id_pedido">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_numero_de_articulo" Association="Self.fk_DetallesDePedidos_numero_de_articulo">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DireccionesClientes_numero_de_cliente" Association="Self.fk_DireccionesClientes_numero_de_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="DireccionesClientes" EntitySet="DireccionesClientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Pedidos_id_direccion" Association="Self.fk_Pedidos_id_direccion">
+            <End Role="DireccionesClientes" EntitySet="DireccionesClientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Pedidos_numero_de_cliente" Association="Self.fk_Pedidos_numero_de_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbpedidosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="numero_de_articulo" />
+          </Key>
+          <Property Name="numero_de_articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_articulo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ArticulosEnFabricas" Relationship="Self.fk_ArticulosEnFabricas_numero_de_articulo" FromRole="Articulos" ToRole="ArticulosEnFabricas" />
+          <NavigationProperty Name="DetallesDePedidos" Relationship="Self.fk_DetallesDePedidos_numero_de_articulo" FromRole="Articulos" ToRole="DetallesDePedidos" />
+        </EntityType>
+        <EntityType Name="ArticulosEnFabrica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_fabrica" Type="Int32" Nullable="false" />
+          <Property Name="numero_de_articulo" Type="Int32" Nullable="false" />
+          <Property Name="existencia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.fk_ArticulosEnFabricas_numero_de_articulo" FromRole="ArticulosEnFabricas" ToRole="Articulos" />
+          <NavigationProperty Name="Fabrica" Relationship="Self.fk_ArticulosEnFabricas_id_fabrica" FromRole="ArticulosEnFabricas" ToRole="Fabricas" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="numero_de_cliente" />
+          </Key>
+          <Property Name="numero_de_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="saldo" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="limite_de_credito" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="descuento" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <NavigationProperty Name="DireccionesClientes" Relationship="Self.fk_DireccionesClientes_numero_de_cliente" FromRole="Clientes" ToRole="DireccionesClientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.fk_Pedidos_numero_de_cliente" FromRole="Clientes" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="DetallesDePedido">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pedido" Type="Int32" Nullable="false" />
+          <Property Name="numero_de_articulo" Type="Int32" Nullable="false" />
+          <Property Name="id_fabrica" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.fk_DetallesDePedidos_numero_de_articulo" FromRole="DetallesDePedidos" ToRole="Articulos" />
+          <NavigationProperty Name="Fabrica" Relationship="Self.fk_DetallesDePedidos_id_fabrica" FromRole="DetallesDePedidos" ToRole="Fabricas" />
+          <NavigationProperty Name="Pedido" Relationship="Self.fk_DetallesDePedidos_id_pedido" FromRole="DetallesDePedidos" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="DireccionesCliente">
+          <Key>
+            <PropertyRef Name="id_direccion" />
+          </Key>
+          <Property Name="id_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero_de_cliente" Type="Int32" Nullable="false" />
+          <Property Name="calle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="barrio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="distrito" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.fk_DireccionesClientes_numero_de_cliente" FromRole="DireccionesClientes" ToRole="Clientes" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.fk_Pedidos_id_direccion" FromRole="DireccionesClientes" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Fabrica">
+          <Key>
+            <PropertyRef Name="id_fabrica" />
+          </Key>
+          <Property Name="id_fabrica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_fabrica" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numero_telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ArticulosEnFabricas" Relationship="Self.fk_ArticulosEnFabricas_id_fabrica" FromRole="Fabricas" ToRole="ArticulosEnFabricas" />
+          <NavigationProperty Name="DetallesDePedidos" Relationship="Self.fk_DetallesDePedidos_id_fabrica" FromRole="Fabricas" ToRole="DetallesDePedidos" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero_de_cliente" Type="Int32" Nullable="false" />
+          <Property Name="id_direccion" Type="Int32" Nullable="false" />
+          <Property Name="fecha_pedido" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="Self.fk_Pedidos_numero_de_cliente" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="DetallesDePedidos" Relationship="Self.fk_DetallesDePedidos_id_pedido" FromRole="Pedidos" ToRole="DetallesDePedidos" />
+          <NavigationProperty Name="DireccionesCliente" Relationship="Self.fk_Pedidos_id_direccion" FromRole="Pedidos" ToRole="DireccionesClientes" />
+        </EntityType>
+        <Association Name="fk_ArticulosEnFabricas_numero_de_articulo">
+          <End Role="Articulos" Type="Self.Articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArticulosEnFabricas" Type="Self.ArticulosEnFabrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Principal>
+            <Dependent Role="ArticulosEnFabricas">
+              <PropertyRef Name="numero_de_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_numero_de_articulo">
+          <End Role="Articulos" Type="Self.Articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="numero_de_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ArticulosEnFabricas_id_fabrica">
+          <End Role="Fabricas" Type="Self.Fabrica" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArticulosEnFabricas" Type="Self.ArticulosEnFabrica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Principal>
+            <Dependent Role="ArticulosEnFabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DireccionesClientes_numero_de_cliente">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DireccionesClientes" Type="Self.DireccionesCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Principal>
+            <Dependent Role="DireccionesClientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Pedidos_numero_de_cliente">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedidos" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="numero_de_cliente" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="numero_de_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_id_fabrica">
+          <End Role="Fabricas" Type="Self.Fabrica" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fabricas">
+              <PropertyRef Name="id_fabrica" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="id_fabrica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DetallesDePedidos_id_pedido">
+          <End Role="Pedidos" Type="Self.Pedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesDePedidos" Type="Self.DetallesDePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedidos">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="DetallesDePedidos">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Pedidos_id_direccion">
+          <End Role="DireccionesClientes" Type="Self.DireccionesCliente" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DireccionesClientes">
+              <PropertyRef Name="id_direccion" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="id_direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbpedidosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulos" EntityType="Self.Articulo" />
+          <EntitySet Name="ArticulosEnFabricas" EntityType="Self.ArticulosEnFabrica" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="DetallesDePedidos" EntityType="Self.DetallesDePedido" />
+          <EntitySet Name="DireccionesClientes" EntityType="Self.DireccionesCliente" />
+          <EntitySet Name="Fabricas" EntityType="Self.Fabrica" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedido" />
+          <AssociationSet Name="fk_ArticulosEnFabricas_numero_de_articulo" Association="Self.fk_ArticulosEnFabricas_numero_de_articulo">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="ArticulosEnFabricas" EntitySet="ArticulosEnFabricas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_numero_de_articulo" Association="Self.fk_DetallesDePedidos_numero_de_articulo">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ArticulosEnFabricas_id_fabrica" Association="Self.fk_ArticulosEnFabricas_id_fabrica">
+            <End Role="Fabricas" EntitySet="Fabricas" />
+            <End Role="ArticulosEnFabricas" EntitySet="ArticulosEnFabricas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DireccionesClientes_numero_de_cliente" Association="Self.fk_DireccionesClientes_numero_de_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="DireccionesClientes" EntitySet="DireccionesClientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Pedidos_numero_de_cliente" Association="Self.fk_Pedidos_numero_de_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_id_fabrica" Association="Self.fk_DetallesDePedidos_id_fabrica">
+            <End Role="Fabricas" EntitySet="Fabricas" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DetallesDePedidos_id_pedido" Association="Self.fk_DetallesDePedidos_id_pedido">
+            <End Role="Pedidos" EntitySet="Pedidos" />
+            <End Role="DetallesDePedidos" EntitySet="DetallesDePedidos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Pedidos_id_direccion" Association="Self.fk_Pedidos_id_direccion">
+            <End Role="DireccionesClientes" EntitySet="DireccionesClientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbpedidosModelStoreContainer" CdmEntityContainer="dbpedidosEntities">
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="dbpedidosModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="numero_de_articulo" ColumnName="numero_de_articulo" />
+                <ScalarProperty Name="descripcion_articulo" ColumnName="descripcion_articulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticulosEnFabricas">
+            <EntityTypeMapping TypeName="dbpedidosModel.ArticulosEnFabrica">
+              <MappingFragment StoreEntitySet="ArticulosEnFabricas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_fabrica" ColumnName="id_fabrica" />
+                <ScalarProperty Name="numero_de_articulo" ColumnName="numero_de_articulo" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="dbpedidosModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="numero_de_cliente" ColumnName="numero_de_cliente" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="limite_de_credito" ColumnName="limite_de_credito" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesDePedidos">
+            <EntityTypeMapping TypeName="dbpedidosModel.DetallesDePedido">
+              <MappingFragment StoreEntitySet="DetallesDePedidos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="numero_de_articulo" ColumnName="numero_de_articulo" />
+                <ScalarProperty Name="id_fabrica" ColumnName="id_fabrica" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DireccionesClientes">
+            <EntityTypeMapping TypeName="dbpedidosModel.DireccionesCliente">
+              <MappingFragment StoreEntitySet="DireccionesClientes">
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="numero_de_cliente" ColumnName="numero_de_cliente" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="barrio" ColumnName="barrio" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fabricas">
+            <EntityTypeMapping TypeName="dbpedidosModel.Fabrica">
+              <MappingFragment StoreEntitySet="Fabricas">
+                <ScalarProperty Name="id_fabrica" ColumnName="id_fabrica" />
+                <ScalarProperty Name="nombre_fabrica" ColumnName="nombre_fabrica" />
+                <ScalarProperty Name="numero_telefono" ColumnName="numero_telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="dbpedidosModel.Pedido">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="numero_de_cliente" ColumnName="numero_de_cliente" />
+                <ScalarProperty Name="id_direccion" ColumnName="id_direccion" />
+                <ScalarProperty Name="fecha_pedido" ColumnName="fecha_pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

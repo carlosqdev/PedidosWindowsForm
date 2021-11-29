@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a62145040274ce79231397131058abb" Name="Diagram1">
+        <EntityTypeShape EntityType="dbpedidosModel.Articulo" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.ArticulosEnFabrica" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.Cliente" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.DetallesDePedido" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.DireccionesCliente" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.Fabrica" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbpedidosModel.Pedido" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbpedidosModel.fk_ArticulosEnFabricas_numero_de_articulo" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_DetallesDePedidos_numero_de_articulo" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_ArticulosEnFabricas_id_fabrica" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_DireccionesClientes_numero_de_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_Pedidos_numero_de_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_DetallesDePedidos_id_fabrica" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_DetallesDePedidos_id_pedido" ManuallyRouted="false" />
+        <AssociationConnector Association="dbpedidosModel.fk_Pedidos_id_direccion" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
