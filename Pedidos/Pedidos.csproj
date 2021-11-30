@@ -94,12 +94,6 @@
     <Compile Include="Datos\Pedido.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="frm_AgregarArticulos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_AgregarArticulos.Designer.cs">
-      <DependentUpon>frm_AgregarArticulos.cs</DependentUpon>
-    </Compile>
     <Compile Include="frm_CrearPedidos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,13 +102,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ArticuloViewModel.cs" />
     <Compile Include="ViewModel\CatalogoArticulosViewModel.cs" />
     <Compile Include="ViewModel\ClienteViewModel.cs" />
     <Compile Include="ViewModel\DireccionesViewModel.cs" />
     <Compile Include="ViewModel\FabricaViewModel.cs" />
-    <EmbeddedResource Include="frm_AgregarArticulos.resx">
-      <DependentUpon>frm_AgregarArticulos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm_CrearPedidos.resx">
       <DependentUpon>frm_CrearPedidos.cs</DependentUpon>
     </EmbeddedResource>

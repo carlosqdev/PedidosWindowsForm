@@ -21,7 +21,10 @@ namespace Pedidos
 
         int numeroCliente = 0;
         int idDireccion = 0;
+        int codigoFabrica = 0;
+        int codigoProducto = 0;
 
+        #region
         private void CargarComboCliente()
         {
             List<ClienteViewModel> lstClientes = new List<ClienteViewModel>();
@@ -46,7 +49,6 @@ namespace Pedidos
             comboClientes.ValueMember = "cod";
             comboClientes.DisplayMember = "nombreCompleto";
         }
-
         private void CargarDireccionesCliente(int codigoCliente)
         {
             List<DireccionesViewModel> lstDirecciones = new List<DireccionesViewModel>();
@@ -68,35 +70,234 @@ namespace Pedidos
                 {
                     MessageBox.Show("Error: " + ex.Message, "Ocurrio un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                dtgvDirecciones.DataSource = lstDirecciones;
+                comboDirecciones.DataSource = lstDirecciones;
+                comboDirecciones.ValueMember = "id_direccion";
+                comboDirecciones.DisplayMember = "direccion";
             }
         }
+        private void cargarComboFabrica()
+        {
+            List<FabricaViewModel> lstFabrica = new List<FabricaViewModel>();
+
+            using (dbpedidosEntities database = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstFabrica = (from d in database.Fabricas
+                                  select new FabricaViewModel
+                                  {
+                                      id_fabrica = d.id_fabrica,
+                                      nombre_fabrica = d.nombre_fabrica
+                                  }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                comboFabricas.DataSource = lstFabrica;
+                comboFabricas.ValueMember = "id_fabrica";
+                comboFabricas.DisplayMember = "nombre_fabrica";
+            }
+        }
+        private void cargarArticulos(int codigoFabrica)
+        {
+            List<CatalogoArticulosViewModel> lstArticulos = new List<CatalogoArticulosViewModel>();
+
+            using (var database = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstArticulos = (from a in database.Articulos
+                                    from af in database.ArticulosEnFabricas
+                                    from f in database.Fabricas
+                                    where a.numero_de_articulo == af.numero_de_articulo
+                                    where f.id_fabrica == af.id_fabrica
+                                    where af.id_fabrica == codigoFabrica
+                                    select new CatalogoArticulosViewModel
+                                    {
+                                        idArticulo = a.numero_de_articulo,
+                                        idFabrica = f.id_fabrica,
+                                        fabricado = f.nombre_fabrica,
+                                        descripcion = a.descripcion_articulo,
+                                        existencia = af.existencia
+                                    }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                comboArticulos.DataSource = lstArticulos;
+                comboArticulos.ValueMember = "idArticulo";
+                comboArticulos.DisplayMember = "descripcion";
+            }
+        }
+        private void buscarArticulos(int codigoFabrica, int codigoProducto)
+        {
+            List<ArticuloViewModel> lstArticulo = new List<ArticuloViewModel>();
+
+            using (var database = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstArticulo = (from a in database.Articulos
+                                   from af in database.ArticulosEnFabricas
+                                   from f in database.Fabricas
+                                   where a.numero_de_articulo == af.numero_de_articulo
+                                   where f.id_fabrica == af.id_fabrica
+                                   where af.id_fabrica == codigoFabrica
+                                   where af.numero_de_articulo == codigoProducto
+                                   select new ArticuloViewModel
+                                   {
+                                       descripcion = a.descripcion_articulo,
+                                       numero_articulo = a.numero_de_articulo,
+                                       existencia = af.existencia,
+                                       cantidad = 1
+                                   }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                foreach (var item in lstArticulo)
+                {
+                    txtDescripcion.Text = item.descripcion;
+                    txtNumeroArticulo.Text = Convert.ToString(item.numero_articulo);
+                    txtExistencia.Text = Convert.ToString(item.existencia);
+                    numericCantidad.Value = item.cantidad;
+                }
+            }
+        }
+        #endregion
+
         private void frm_CrearPedidos_Load(object sender, EventArgs e)
         {
-            CargarComboCliente();
+            
         }
-
-        private void btnAgregarArticulo_Click(object sender, EventArgs e)
-        {
-            //mas tarde lo ocupo
-        }
-
+        
         private void comboClientes_SelectionChangeCommitted(object sender, EventArgs e)
         {
             numeroCliente = Convert.ToInt32(comboClientes.SelectedValue);
             if (numeroCliente > 0)
             {
                 CargarDireccionesCliente(numeroCliente);
+                comboDirecciones.Enabled = true;
+            }
+            
+        }
+
+        private void comboDirecciones_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            numeroCliente = Convert.ToInt32(comboClientes.SelectedValue);
+            if (numeroCliente > 0)
+            {
+                txtIdDireccion.Text = comboDirecciones.SelectedValue.ToString();
+                txtDireccionEnvio.Text = comboDirecciones.Text.ToString();
             }
         }
 
-        private void dtgvDirecciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void comboFabricas_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            idDireccion = int.Parse(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[0].Value.ToString());
-            if (idDireccion > 0)
+            codigoFabrica = Convert.ToInt32(comboFabricas.SelectedValue);
+            if (codigoFabrica > 0)
             {
-                txtIdDireccion.Text = Convert.ToString(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[0].Value);
-                txtDireccionEnvio.Text = Convert.ToString(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[2].Value);
+                cargarArticulos(codigoFabrica);
+                comboArticulos.Enabled = true;
+            }
+        }
+
+        private void comboArticulos_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            codigoProducto = Convert.ToInt32(comboArticulos.SelectedValue);
+            if (codigoFabrica > 0 && codigoProducto > 0)
+            {
+                buscarArticulos(codigoFabrica, codigoProducto);
+                numericCantidad.Enabled = true;
+                btnAgregar.Enabled = true;
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (numericCantidad.Value > 0){
+                string descripcion = txtDescripcion.Text;
+                int idFabrica = Convert.ToInt32(comboFabricas.SelectedValue);
+                int numero_articulo = Convert.ToInt32(txtNumeroArticulo.Text);
+                int cantidad = Convert.ToInt32(numericCantidad.Value);
+                dtgvArticulos.Rows.Add(new object[] { descripcion, idFabrica, numero_articulo, cantidad, "Eliminar" });
+
+                txtDescripcion.Text = "";
+                txtNumeroArticulo.Text = "";
+                txtExistencia.Text = "";
+                numericCantidad.Value = 0;
+            }
+            else {
+                MessageBox.Show("La cantidad debe ser mayor a cero", "Falta definir cantidad", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+        }
+
+        private void dtgvArticulos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != dtgvArticulos.Columns["Op"].Index)
+                return;
+
+            dtgvArticulos.Rows.RemoveAt(e.RowIndex);
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            CargarComboCliente();
+            cargarComboFabrica();
+            comboClientes.Enabled = true;
+            comboFabricas.Enabled = true;
+            btnNuevo.Enabled = false;
+            btnGuardar.Enabled = true;
+            btnCancelar.Enabled = true;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            using (dbpedidosEntities db = new dbpedidosEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Pedido oPedido = new Pedido();
+                        oPedido.numero_de_cliente = Convert.ToInt32(comboClientes.SelectedValue);
+                        oPedido.id_direccion = Convert.ToInt32(txtIdDireccion.Text);
+                        oPedido.fecha_pedido = DateTime.Now;
+
+                        db.Pedidos.Add(oPedido);
+                        db.SaveChanges();
+
+                        foreach (DataGridViewRow dr in dtgvArticulos.Rows)
+                        {
+                            DetallesDePedido oDetalle = new DetallesDePedido();
+                            oDetalle.id_pedido = oPedido.id_pedido;
+                            oDetalle.numero_de_articulo = Convert.ToInt32(dr.Cells[3].Value);
+                            oDetalle.id_fabrica = Convert.ToInt32(dr.Cells[1].Value);
+                            oDetalle.cantidad = Convert.ToInt32(dr.Cells[2].Value);
+
+                            db.DetallesDePedidos.Add(oDetalle);
+                        }
+
+                        db.SaveChanges();
+
+                        dbContextTransaction.Commit();
+                        MessageBox.Show("Pedido guardado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        dbContextTransaction.Rollback();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
     }
