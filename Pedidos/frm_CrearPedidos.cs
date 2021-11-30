@@ -23,13 +23,13 @@ namespace Pedidos
 
         private void CargarComboCliente()
         {
-            List<ClienteViewModel> lstEmployed = new List<ClienteViewModel>();
+            List<ClienteViewModel> lstClientes = new List<ClienteViewModel>();
 
             using (dbpedidosEntities database = new dbpedidosEntities())
             {
                 try
                 {
-                    lstEmployed = (from d in database.Clientes
+                    lstClientes = (from d in database.Clientes
                                    select new ClienteViewModel
                                    {
                                        cod = d.numero_de_cliente,
@@ -41,7 +41,7 @@ namespace Pedidos
                     MessageBox.Show("Error: " + ex.Message, "Ocurrio un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            comboClientes.DataSource = lstEmployed;
+            comboClientes.DataSource = lstClientes;
             comboClientes.ValueMember = "cod";
             comboClientes.DisplayMember = "nombreCompleto";
         }
