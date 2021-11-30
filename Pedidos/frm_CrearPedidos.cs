@@ -20,6 +20,7 @@ namespace Pedidos
         }
 
         int numeroCliente = 0;
+        int idDireccion = 0;
 
         private void CargarComboCliente()
         {
@@ -86,6 +87,16 @@ namespace Pedidos
             if (numeroCliente > 0)
             {
                 CargarDireccionesCliente(numeroCliente);
+            }
+        }
+
+        private void dtgvDirecciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            idDireccion = int.Parse(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[0].Value.ToString());
+            if (idDireccion > 0)
+            {
+                txtIdDireccion.Text = Convert.ToString(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[0].Value);
+                txtDireccionEnvio.Text = Convert.ToString(dtgvDirecciones.Rows[dtgvDirecciones.CurrentRow.Index].Cells[2].Value);
             }
         }
     }

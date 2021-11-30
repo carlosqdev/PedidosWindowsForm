@@ -127,6 +127,7 @@ namespace Pedidos
             this.dtgvDirecciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgvDirecciones.Size = new System.Drawing.Size(761, 87);
             this.dtgvDirecciones.TabIndex = 7;
+            this.dtgvDirecciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvDirecciones_CellDoubleClick);
             // 
             // txtIdDireccion
             // 
