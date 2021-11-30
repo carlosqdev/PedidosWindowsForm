@@ -20,7 +20,6 @@ namespace Pedidos
         }
 
         int numeroCliente = 0;
-        int idDireccion = 0;
         int codigoFabrica = 0;
         int codigoProducto = 0;
 
@@ -149,9 +148,9 @@ namespace Pedidos
                                    select new ArticuloViewModel
                                    {
                                        descripcion = a.descripcion_articulo,
-                                       numero_articulo = a.numero_de_articulo,
+                                       numero_articulo = af.numero_de_articulo,
                                        existencia = af.existencia,
-                                       cantidad = 1
+                                       cantidad = 0
                                    }).ToList();
                 }
                 catch (Exception ex)
@@ -223,7 +222,7 @@ namespace Pedidos
                 int idFabrica = Convert.ToInt32(comboFabricas.SelectedValue);
                 int numero_articulo = Convert.ToInt32(txtNumeroArticulo.Text);
                 int cantidad = Convert.ToInt32(numericCantidad.Value);
-                dtgvArticulos.Rows.Add(new object[] { descripcion, idFabrica, numero_articulo, cantidad, "Eliminar" });
+                dtgvArticulos.Rows.Add(new object[] { descripcion, idFabrica, cantidad, numero_articulo, "Eliminar" });
 
                 txtDescripcion.Text = "";
                 txtNumeroArticulo.Text = "";
@@ -232,8 +231,7 @@ namespace Pedidos
             }
             else {
                 MessageBox.Show("La cantidad debe ser mayor a cero", "Falta definir cantidad", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            
+            }            
         }
 
         private void dtgvArticulos_CellClick(object sender, DataGridViewCellEventArgs e)
