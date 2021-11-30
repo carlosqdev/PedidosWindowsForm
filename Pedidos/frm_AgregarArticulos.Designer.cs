@@ -33,9 +33,9 @@ namespace Pedidos
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboFabricas = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dtgvArticulos = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.dtgvArticulos = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvArticulos)).BeginInit();
@@ -69,6 +69,7 @@ namespace Pedidos
             this.comboFabricas.Size = new System.Drawing.Size(602, 21);
             this.comboFabricas.TabIndex = 1;
             this.comboFabricas.Text = "Seleccione una fabrica";
+            this.comboFabricas.SelectionChangeCommitted += new System.EventHandler(this.comboFabricas_SelectionChangeCommitted);
             // 
             // groupBox2
             // 
@@ -78,6 +79,20 @@ namespace Pedidos
             this.groupBox2.Size = new System.Drawing.Size(776, 318);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
+            // 
+            // dtgvArticulos
+            // 
+            this.dtgvArticulos.AllowUserToAddRows = false;
+            this.dtgvArticulos.AllowUserToDeleteRows = false;
+            this.dtgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvArticulos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgvArticulos.Location = new System.Drawing.Point(3, 16);
+            this.dtgvArticulos.Name = "dtgvArticulos";
+            this.dtgvArticulos.ReadOnly = true;
+            this.dtgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgvArticulos.Size = new System.Drawing.Size(770, 299);
+            this.dtgvArticulos.TabIndex = 0;
             // 
             // btnAgregar
             // 
@@ -99,20 +114,6 @@ namespace Pedidos
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // dtgvArticulos
-            // 
-            this.dtgvArticulos.AllowUserToAddRows = false;
-            this.dtgvArticulos.AllowUserToDeleteRows = false;
-            this.dtgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvArticulos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgvArticulos.Location = new System.Drawing.Point(3, 16);
-            this.dtgvArticulos.Name = "dtgvArticulos";
-            this.dtgvArticulos.ReadOnly = true;
-            this.dtgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgvArticulos.Size = new System.Drawing.Size(770, 299);
-            this.dtgvArticulos.TabIndex = 0;
-            // 
             // frm_AgregarArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -128,6 +129,7 @@ namespace Pedidos
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar articulos";
+            this.Load += new System.EventHandler(this.frm_AgregarArticulos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

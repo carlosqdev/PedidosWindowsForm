@@ -109,8 +109,10 @@
     <Compile Include="Logica\CLIENTES.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CatalogoArticulosViewModel.cs" />
     <Compile Include="ViewModel\ClienteViewModel.cs" />
     <Compile Include="ViewModel\DireccionesViewModel.cs" />
+    <Compile Include="ViewModel\FabricaViewModel.cs" />
     <EmbeddedResource Include="frm_AgregarArticulos.resx">
       <DependentUpon>frm_AgregarArticulos.cs</DependentUpon>
     </EmbeddedResource>
