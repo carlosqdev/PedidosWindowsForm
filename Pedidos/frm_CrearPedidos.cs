@@ -218,16 +218,23 @@ namespace Pedidos
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (numericCantidad.Value > 0){
-                string descripcion = txtDescripcion.Text;
-                int idFabrica = Convert.ToInt32(comboFabricas.SelectedValue);
-                int numero_articulo = Convert.ToInt32(txtNumeroArticulo.Text);
-                int cantidad = Convert.ToInt32(numericCantidad.Value);
-                dtgvArticulos.Rows.Add(new object[] { descripcion, idFabrica, cantidad, numero_articulo, "Eliminar" });
+                if (numericCantidad.Value <= Convert.ToInt32(txtExistencia.Text))
+                {
+                    string descripcion = txtDescripcion.Text;
+                    int idFabrica = Convert.ToInt32(comboFabricas.SelectedValue);
+                    int numero_articulo = Convert.ToInt32(txtNumeroArticulo.Text);
+                    int cantidad = Convert.ToInt32(numericCantidad.Value);
+                    dtgvArticulos.Rows.Add(new object[] { descripcion, idFabrica, cantidad, numero_articulo, "Eliminar" });
 
-                txtDescripcion.Text = "";
-                txtNumeroArticulo.Text = "";
-                txtExistencia.Text = "";
-                numericCantidad.Value = 0;
+                    txtDescripcion.Text = "";
+                    txtNumeroArticulo.Text = "";
+                    txtExistencia.Text = "";
+                    numericCantidad.Value = 0;
+                }
+                else
+                {
+                    MessageBox.Show("No hay suficientes articulos, su pedido supera la existencia actual", "Articulos insuficientes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else {
                 MessageBox.Show("La cantidad debe ser mayor a cero", "Falta definir cantidad", MessageBoxButtons.OK, MessageBoxIcon.Information);
