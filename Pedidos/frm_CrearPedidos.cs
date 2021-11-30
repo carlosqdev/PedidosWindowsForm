@@ -22,6 +22,7 @@ namespace Pedidos
         int numeroCliente = 0;
         int codigoFabrica = 0;
         int codigoProducto = 0;
+        bool articuloEnLista = false;
 
         #region
         private void CargarComboCliente()
@@ -166,8 +167,47 @@ namespace Pedidos
                 }
             }
         }
-        #endregion
+        private void guardarPedido()
+        {
+            using (dbpedidosEntities db = new dbpedidosEntities())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Pedido oPedido = new Pedido();
+                        oPedido.numero_de_cliente = Convert.ToInt32(comboClientes.SelectedValue);
+                        oPedido.id_direccion = Convert.ToInt32(txtIdDireccion.Text);
+                        oPedido.fecha_pedido = DateTime.Now;
 
+                        db.Pedidos.Add(oPedido);
+                        db.SaveChanges();
+
+                        foreach (DataGridViewRow dr in dtgvArticulos.Rows)
+                        {
+                            DetallesDePedido oDetalle = new DetallesDePedido();
+                            oDetalle.id_pedido = oPedido.id_pedido;
+                            oDetalle.numero_de_articulo = Convert.ToInt32(dr.Cells[3].Value);
+                            oDetalle.id_fabrica = Convert.ToInt32(dr.Cells[1].Value);
+                            oDetalle.cantidad = Convert.ToInt32(dr.Cells[2].Value);
+
+                            db.DetallesDePedidos.Add(oDetalle);
+                        }
+
+                        db.SaveChanges();
+
+                        dbContextTransaction.Commit();
+                        MessageBox.Show("Pedido guardado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        dbContextTransaction.Rollback();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        #endregion
         private void frm_CrearPedidos_Load(object sender, EventArgs e)
         {
             
@@ -230,6 +270,8 @@ namespace Pedidos
                     txtNumeroArticulo.Text = "";
                     txtExistencia.Text = "";
                     numericCantidad.Value = 0;
+
+                    articuloEnLista = true;
                 }
                 else
                 {
@@ -267,43 +309,14 @@ namespace Pedidos
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            using (dbpedidosEntities db = new dbpedidosEntities())
-            {
-                using (var dbContextTransaction = db.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        Pedido oPedido = new Pedido();
-                        oPedido.numero_de_cliente = Convert.ToInt32(comboClientes.SelectedValue);
-                        oPedido.id_direccion = Convert.ToInt32(txtIdDireccion.Text);
-                        oPedido.fecha_pedido = DateTime.Now;
-
-                        db.Pedidos.Add(oPedido);
-                        db.SaveChanges();
-
-                        foreach (DataGridViewRow dr in dtgvArticulos.Rows)
-                        {
-                            DetallesDePedido oDetalle = new DetallesDePedido();
-                            oDetalle.id_pedido = oPedido.id_pedido;
-                            oDetalle.numero_de_articulo = Convert.ToInt32(dr.Cells[3].Value);
-                            oDetalle.id_fabrica = Convert.ToInt32(dr.Cells[1].Value);
-                            oDetalle.cantidad = Convert.ToInt32(dr.Cells[2].Value);
-
-                            db.DetallesDePedidos.Add(oDetalle);
-                        }
-
-                        db.SaveChanges();
-
-                        dbContextTransaction.Commit();
-                        MessageBox.Show("Pedido guardado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        dbContextTransaction.Rollback();
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            if (numeroCliente <= 0)
+                MessageBox.Show("Debe seleccionar un cliente", "Falta un campo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else if (txtIdDireccion.Text == "")
+                MessageBox.Show("Debe seleccionar una dirección del cliente", "Falta un campo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else if (articuloEnLista == false)
+                MessageBox.Show("Debe agregar como minimo un articulo", "Detalle del pedido esta vacio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+                guardarPedido();
         }
     }
 }
