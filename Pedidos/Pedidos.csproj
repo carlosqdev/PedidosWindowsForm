@@ -104,6 +104,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ClienteViewModel.cs" />
+    <Compile Include="ViewModel\DireccionesViewModel.cs" />
     <EmbeddedResource Include="frm_CrearPedidos.resx">
       <DependentUpon>frm_CrearPedidos.cs</DependentUpon>
     </EmbeddedResource>

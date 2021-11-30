@@ -19,6 +19,8 @@ namespace Pedidos
             InitializeComponent();
         }
 
+        int numeroCliente = 0;
+
         private void CargarComboCliente()
         {
             List<ClienteViewModel> lstEmployed = new List<ClienteViewModel>();
@@ -43,9 +45,48 @@ namespace Pedidos
             comboClientes.ValueMember = "cod";
             comboClientes.DisplayMember = "nombreCompleto";
         }
+
+        private void CargarDireccionesCliente(int codigoCliente)
+        {
+            List<DireccionesViewModel> lstDirecciones = new List<DireccionesViewModel>();
+
+            using (dbpedidosEntities database = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstDirecciones = (from d in database.DireccionesClientes
+                                      where d.numero_de_cliente == codigoCliente
+                                      select new DireccionesViewModel
+                                      {
+                                          id_direccion = d.id_direccion,
+                                          numero_cliente = d.numero_de_cliente,
+                                          direccion = d.calle+" "+d.barrio+" "+d.distrito
+                                      }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Ocurrio un error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                dtgvDirecciones.DataSource = lstDirecciones;
+            }
+        }
         private void frm_CrearPedidos_Load(object sender, EventArgs e)
         {
             CargarComboCliente();
+        }
+
+        private void btnAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            //mas tarde lo ocupo
+        }
+
+        private void comboClientes_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            numeroCliente = Convert.ToInt32(comboClientes.SelectedValue);
+            if (numeroCliente > 0)
+            {
+                CargarDireccionesCliente(numeroCliente);
+            }
         }
     }
 }

@@ -35,21 +35,21 @@ namespace Pedidos
             this.comboClientes = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dgvDirecciones = new System.Windows.Forms.DataGridView();
+            this.dtgvDirecciones = new System.Windows.Forms.DataGridView();
             this.txtIdDireccion = new System.Windows.Forms.TextBox();
             this.txtDireccionEnvio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAgregarArticulo = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.dtgCuerpoPedido = new System.Windows.Forms.DataGridView();
+            this.dtgvCuerpoPedido = new System.Windows.Forms.DataGridView();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDirecciones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDirecciones)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgCuerpoPedido)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvCuerpoPedido)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpFechaPedido
@@ -85,11 +85,12 @@ namespace Pedidos
             this.comboClientes.Name = "comboClientes";
             this.comboClientes.Size = new System.Drawing.Size(464, 21);
             this.comboClientes.TabIndex = 3;
+            this.comboClientes.SelectionChangeCommitted += new System.EventHandler(this.comboClientes_SelectionChangeCommitted);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.dgvDirecciones);
+            this.groupBox1.Controls.Add(this.dtgvDirecciones);
             this.groupBox1.Controls.Add(this.txtIdDireccion);
             this.groupBox1.Controls.Add(this.txtDireccionEnvio);
             this.groupBox1.Controls.Add(this.label3);
@@ -114,13 +115,18 @@ namespace Pedidos
             this.label4.TabIndex = 8;
             this.label4.Text = "Direcciones del cliente";
             // 
-            // dgvDirecciones
+            // dtgvDirecciones
             // 
-            this.dgvDirecciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDirecciones.Location = new System.Drawing.Point(9, 74);
-            this.dgvDirecciones.Name = "dgvDirecciones";
-            this.dgvDirecciones.Size = new System.Drawing.Size(761, 87);
-            this.dgvDirecciones.TabIndex = 7;
+            this.dtgvDirecciones.AllowUserToAddRows = false;
+            this.dtgvDirecciones.AllowUserToDeleteRows = false;
+            this.dtgvDirecciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvDirecciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvDirecciones.Location = new System.Drawing.Point(9, 74);
+            this.dtgvDirecciones.Name = "dtgvDirecciones";
+            this.dtgvDirecciones.ReadOnly = true;
+            this.dtgvDirecciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgvDirecciones.Size = new System.Drawing.Size(761, 87);
+            this.dtgvDirecciones.TabIndex = 7;
             // 
             // txtIdDireccion
             // 
@@ -165,6 +171,7 @@ namespace Pedidos
             this.btnAgregarArticulo.TabIndex = 0;
             this.btnAgregarArticulo.Text = "Agregar articulo";
             this.btnAgregarArticulo.UseVisualStyleBackColor = true;
+            this.btnAgregarArticulo.Click += new System.EventHandler(this.btnAgregarArticulo_Click);
             // 
             // label5
             // 
@@ -176,13 +183,13 @@ namespace Pedidos
             this.label5.TabIndex = 6;
             this.label5.Text = "Cuerpo del pedido";
             // 
-            // dtgCuerpoPedido
+            // dtgvCuerpoPedido
             // 
-            this.dtgCuerpoPedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgCuerpoPedido.Location = new System.Drawing.Point(12, 292);
-            this.dtgCuerpoPedido.Name = "dtgCuerpoPedido";
-            this.dtgCuerpoPedido.Size = new System.Drawing.Size(770, 189);
-            this.dtgCuerpoPedido.TabIndex = 7;
+            this.dtgvCuerpoPedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvCuerpoPedido.Location = new System.Drawing.Point(12, 292);
+            this.dtgvCuerpoPedido.Name = "dtgvCuerpoPedido";
+            this.dtgvCuerpoPedido.Size = new System.Drawing.Size(770, 189);
+            this.dtgvCuerpoPedido.TabIndex = 7;
             // 
             // btnNuevo
             // 
@@ -222,7 +229,7 @@ namespace Pedidos
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnNuevo);
-            this.Controls.Add(this.dtgCuerpoPedido);
+            this.Controls.Add(this.dtgvCuerpoPedido);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -234,9 +241,9 @@ namespace Pedidos
             this.Load += new System.EventHandler(this.frm_CrearPedidos_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDirecciones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDirecciones)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgCuerpoPedido)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvCuerpoPedido)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,11 +260,11 @@ namespace Pedidos
         private System.Windows.Forms.TextBox txtDireccionEnvio;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dgvDirecciones;
+        private System.Windows.Forms.DataGridView dtgvDirecciones;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnAgregarArticulo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dtgCuerpoPedido;
+        private System.Windows.Forms.DataGridView dtgvCuerpoPedido;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
