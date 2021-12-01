@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\CatalogoArticulosViewModel.cs" />
     <Compile Include="ViewModel\ClientesViewModel.cs" />
     <Compile Include="ViewModel\ClienteViewModel.cs" />
+    <Compile Include="ViewModel\DireccionesClientesViewModel.cs" />
     <Compile Include="ViewModel\DireccionesViewModel.cs" />
     <Compile Include="ViewModel\FabricaViewModel.cs" />
     <EmbeddedResource Include="frm_AdministrarClientes.resx">

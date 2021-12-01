@@ -34,6 +34,7 @@ namespace Pedidos
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgClientes = new System.Windows.Forms.DataGridView();
+            this.btnDirecciones = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
@@ -41,6 +42,7 @@ namespace Pedidos
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDirecciones);
             this.groupBox1.Controls.Add(this.btnModificarCliente);
             this.groupBox1.Controls.Add(this.btnAgregarCliente);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -53,16 +55,17 @@ namespace Pedidos
             // btnModificarCliente
             // 
             this.btnModificarCliente.Enabled = false;
-            this.btnModificarCliente.Location = new System.Drawing.Point(375, 21);
+            this.btnModificarCliente.Location = new System.Drawing.Point(309, 21);
             this.btnModificarCliente.Name = "btnModificarCliente";
             this.btnModificarCliente.Size = new System.Drawing.Size(113, 39);
             this.btnModificarCliente.TabIndex = 1;
             this.btnModificarCliente.Text = "Modificar cliente";
             this.btnModificarCliente.UseVisualStyleBackColor = true;
+            this.btnModificarCliente.Click += new System.EventHandler(this.btnModificarCliente_Click);
             // 
             // btnAgregarCliente
             // 
-            this.btnAgregarCliente.Location = new System.Drawing.Point(247, 21);
+            this.btnAgregarCliente.Location = new System.Drawing.Point(190, 21);
             this.btnAgregarCliente.Name = "btnAgregarCliente";
             this.btnAgregarCliente.Size = new System.Drawing.Size(113, 39);
             this.btnAgregarCliente.TabIndex = 0;
@@ -94,6 +97,16 @@ namespace Pedidos
             this.dtgClientes.TabIndex = 0;
             this.dtgClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgClientes_CellDoubleClick);
             // 
+            // btnDirecciones
+            // 
+            this.btnDirecciones.Enabled = false;
+            this.btnDirecciones.Location = new System.Drawing.Point(428, 21);
+            this.btnDirecciones.Name = "btnDirecciones";
+            this.btnDirecciones.Size = new System.Drawing.Size(156, 39);
+            this.btnDirecciones.TabIndex = 2;
+            this.btnDirecciones.Text = "Direcciones del cliente";
+            this.btnDirecciones.UseVisualStyleBackColor = true;
+            // 
             // frm_AdministrarClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,5 +134,6 @@ namespace Pedidos
         private System.Windows.Forms.Button btnAgregarCliente;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dtgClientes;
+        private System.Windows.Forms.Button btnDirecciones;
     }
 }

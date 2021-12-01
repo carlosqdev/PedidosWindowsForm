@@ -19,6 +19,8 @@ namespace Pedidos
             InitializeComponent();
         }
 
+        int numeroCliente = 0;
+
         #region
         private void cargarClientes()
         {
@@ -55,7 +57,11 @@ namespace Pedidos
 
         private void dtgClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            numeroCliente = int.Parse(dtgClientes.Rows[dtgClientes.CurrentRow.Index].Cells[0].Value.ToString());
+            if (numeroCliente > 0)
+            {
+                btnModificarCliente.Enabled = true;
+            }
         }
 
         private void btnAgregarCliente_Click(object sender, EventArgs e)
@@ -63,6 +69,17 @@ namespace Pedidos
             frm_Cliente frmCliente = new frm_Cliente();
             frmCliente.ShowDialog();
             cargarClientes();
+        }
+
+        private void btnModificarCliente_Click(object sender, EventArgs e)
+        {
+            frm_Cliente frmCliente = new frm_Cliente();
+            frmCliente.numCliente = numeroCliente;
+            frmCliente.Height = 147;
+            frmCliente.ShowDialog();
+            cargarClientes();
+            btnModificarCliente.Enabled = false;
+            numeroCliente = 0;
         }
     }
 }

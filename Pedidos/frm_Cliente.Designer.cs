@@ -37,26 +37,29 @@ namespace Pedidos
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtgDirecciones = new System.Windows.Forms.DataGridView();
-            this.txtCalle = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtBarrio = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.groupBoxDirecciones = new System.Windows.Forms.GroupBox();
+            this.btnAgregarDireccion = new System.Windows.Forms.Button();
             this.txtDistrito = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnAgregarDireccion = new System.Windows.Forms.Button();
+            this.txtBarrio = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCalle = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtgDirecciones = new System.Windows.Forms.DataGridView();
             this.calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barrio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.distrito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Op = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.id_direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxDirecciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDirecciones)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnActualizar);
             this.groupBox1.Controls.Add(this.txtDescuento);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtLimiteCredito);
@@ -129,74 +132,34 @@ namespace Pedidos
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // groupBox2
+            // groupBoxDirecciones
             // 
-            this.groupBox2.Controls.Add(this.btnAgregarDireccion);
-            this.groupBox2.Controls.Add(this.txtDistrito);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtBarrio);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.txtCalle);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.dtgDirecciones);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 103);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(529, 301);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Direcciones de envios";
+            this.groupBoxDirecciones.Controls.Add(this.btnAgregarDireccion);
+            this.groupBoxDirecciones.Controls.Add(this.txtDistrito);
+            this.groupBoxDirecciones.Controls.Add(this.label7);
+            this.groupBoxDirecciones.Controls.Add(this.txtBarrio);
+            this.groupBoxDirecciones.Controls.Add(this.label6);
+            this.groupBoxDirecciones.Controls.Add(this.txtCalle);
+            this.groupBoxDirecciones.Controls.Add(this.label1);
+            this.groupBoxDirecciones.Controls.Add(this.dtgDirecciones);
+            this.groupBoxDirecciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxDirecciones.Location = new System.Drawing.Point(12, 103);
+            this.groupBoxDirecciones.Name = "groupBoxDirecciones";
+            this.groupBoxDirecciones.Size = new System.Drawing.Size(529, 301);
+            this.groupBoxDirecciones.TabIndex = 2;
+            this.groupBoxDirecciones.TabStop = false;
+            this.groupBoxDirecciones.Text = "Direcciones de envios";
             // 
-            // dtgDirecciones
+            // btnAgregarDireccion
             // 
-            this.dtgDirecciones.AllowUserToAddRows = false;
-            this.dtgDirecciones.AllowUserToDeleteRows = false;
-            this.dtgDirecciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtgDirecciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgDirecciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.calle,
-            this.barrio,
-            this.distrito,
-            this.Op});
-            this.dtgDirecciones.Location = new System.Drawing.Point(6, 157);
-            this.dtgDirecciones.Name = "dtgDirecciones";
-            this.dtgDirecciones.ReadOnly = true;
-            this.dtgDirecciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgDirecciones.Size = new System.Drawing.Size(505, 138);
-            this.dtgDirecciones.TabIndex = 0;
-            this.dtgDirecciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgDirecciones_CellClick);
-            // 
-            // txtCalle
-            // 
-            this.txtCalle.Location = new System.Drawing.Point(71, 21);
-            this.txtCalle.Name = "txtCalle";
-            this.txtCalle.Size = new System.Drawing.Size(440, 22);
-            this.txtCalle.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Calle:";
-            // 
-            // txtBarrio
-            // 
-            this.txtBarrio.Location = new System.Drawing.Point(71, 49);
-            this.txtBarrio.Name = "txtBarrio";
-            this.txtBarrio.Size = new System.Drawing.Size(440, 22);
-            this.txtBarrio.TabIndex = 9;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 16);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Barrio";
+            this.btnAgregarDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarDireccion.Location = new System.Drawing.Point(166, 112);
+            this.btnAgregarDireccion.Name = "btnAgregarDireccion";
+            this.btnAgregarDireccion.Size = new System.Drawing.Size(159, 39);
+            this.btnAgregarDireccion.TabIndex = 3;
+            this.btnAgregarDireccion.Text = "Agregar dirección";
+            this.btnAgregarDireccion.UseVisualStyleBackColor = true;
+            this.btnAgregarDireccion.Click += new System.EventHandler(this.btnAgregarDireccion_Click);
             // 
             // txtDistrito
             // 
@@ -214,16 +177,57 @@ namespace Pedidos
             this.label7.TabIndex = 10;
             this.label7.Text = "Distrito";
             // 
-            // btnAgregarDireccion
+            // txtBarrio
             // 
-            this.btnAgregarDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarDireccion.Location = new System.Drawing.Point(177, 112);
-            this.btnAgregarDireccion.Name = "btnAgregarDireccion";
-            this.btnAgregarDireccion.Size = new System.Drawing.Size(159, 39);
-            this.btnAgregarDireccion.TabIndex = 3;
-            this.btnAgregarDireccion.Text = "Agregar dirección";
-            this.btnAgregarDireccion.UseVisualStyleBackColor = true;
-            this.btnAgregarDireccion.Click += new System.EventHandler(this.btnAgregarDireccion_Click);
+            this.txtBarrio.Location = new System.Drawing.Point(71, 49);
+            this.txtBarrio.Name = "txtBarrio";
+            this.txtBarrio.Size = new System.Drawing.Size(440, 22);
+            this.txtBarrio.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(5, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 16);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Barrio";
+            // 
+            // txtCalle
+            // 
+            this.txtCalle.Location = new System.Drawing.Point(71, 21);
+            this.txtCalle.Name = "txtCalle";
+            this.txtCalle.Size = new System.Drawing.Size(440, 22);
+            this.txtCalle.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 16);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Calle:";
+            // 
+            // dtgDirecciones
+            // 
+            this.dtgDirecciones.AllowUserToAddRows = false;
+            this.dtgDirecciones.AllowUserToDeleteRows = false;
+            this.dtgDirecciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgDirecciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgDirecciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.calle,
+            this.barrio,
+            this.distrito,
+            this.Op,
+            this.id_direccion});
+            this.dtgDirecciones.Location = new System.Drawing.Point(6, 157);
+            this.dtgDirecciones.Name = "dtgDirecciones";
+            this.dtgDirecciones.ReadOnly = true;
+            this.dtgDirecciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgDirecciones.Size = new System.Drawing.Size(505, 138);
+            this.dtgDirecciones.TabIndex = 0;
+            this.dtgDirecciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgDirecciones_CellClick);
             // 
             // calle
             // 
@@ -249,12 +253,31 @@ namespace Pedidos
             this.Op.Name = "Op";
             this.Op.ReadOnly = true;
             // 
+            // id_direccion
+            // 
+            this.id_direccion.HeaderText = "id_direccion";
+            this.id_direccion.Name = "id_direccion";
+            this.id_direccion.ReadOnly = true;
+            this.id_direccion.Visible = false;
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.Location = new System.Drawing.Point(397, 45);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(114, 34);
+            this.btnActualizar.TabIndex = 12;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Visible = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // frm_Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 458);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxDirecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnGuardar);
             this.MaximizeBox = false;
@@ -264,10 +287,11 @@ namespace Pedidos
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cliente";
+            this.Load += new System.EventHandler(this.frm_Cliente_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBoxDirecciones.ResumeLayout(false);
+            this.groupBoxDirecciones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDirecciones)).EndInit();
             this.ResumeLayout(false);
 
@@ -283,7 +307,7 @@ namespace Pedidos
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxDirecciones;
         private System.Windows.Forms.DataGridView dtgDirecciones;
         private System.Windows.Forms.TextBox txtDistrito;
         private System.Windows.Forms.Label label7;
@@ -296,5 +320,7 @@ namespace Pedidos
         private System.Windows.Forms.DataGridViewTextBoxColumn barrio;
         private System.Windows.Forms.DataGridViewTextBoxColumn distrito;
         private System.Windows.Forms.DataGridViewButtonColumn Op;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_direccion;
+        private System.Windows.Forms.Button btnActualizar;
     }
 }

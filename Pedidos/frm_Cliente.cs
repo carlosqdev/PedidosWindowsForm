@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Pedidos.Datos;
+using Pedidos.ViewModel;
 
 namespace Pedidos
 {
@@ -18,7 +19,9 @@ namespace Pedidos
             InitializeComponent();
         }
 
+        bool camposCompletos = false;
         bool existenDirecciones = false;
+        public int numCliente = 0;
 
         private void guardarCliente()
         {
@@ -61,7 +64,63 @@ namespace Pedidos
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void actualizarCliente()
+        {
+            using (var db = new dbpedidosEntities())
+            {
+                try
+                {
+                    Cliente oCliente = db.Clientes.Find(numCliente);
+                    if (oCliente != null)
+                    {
+                        oCliente.nombre_cliente = txtNombre.Text.Trim();
+                        oCliente.limite_de_credito = Convert.ToDecimal(txtLimiteCredito.Text.Trim());
+                        oCliente.descuento = Convert.ToDecimal(txtDescuento.Text.Trim());
+
+                        db.SaveChanges();
+                        MessageBox.Show("Cliente actualizado correctamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void buscarCliente()
+        {
+            List<ClientesViewModel> lstCliente = new List<ClientesViewModel>();
+
+            using (var db = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstCliente = (from c in db.Clientes
+                                  where c.numero_de_cliente == numCliente
+                                  select new ClientesViewModel
+                                  {
+                                      numero = c.numero_de_cliente,
+                                      nombres = c.nombre_cliente,
+                                      saldo = c.saldo,
+                                      limite_credito = c.limite_de_credito,
+                                      descuento = c.descuento
+                                  }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                foreach (var client in lstCliente)
+                {
+                    txtNombre.Text = client.nombres.ToString();
+                    txtLimiteCredito.Text = client.limite_credito.ToString();
+                    txtDescuento.Text = client.descuento.ToString();
+                }
+            }
+        }
+
+        private void verificarCamposVacios()
         {
             if (txtNombre.Text == "")
             {
@@ -83,6 +142,45 @@ namespace Pedidos
                 MessageBox.Show("Debe registrar una dirección minimo", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
+            {
+                camposCompletos = true;
+            }
+        }
+
+        private void buscarDirecciones()
+        {
+            List<DireccionesClientesViewModel> lstDirecciones = new List<DireccionesClientesViewModel>();
+
+            using (var db = new dbpedidosEntities())
+            {
+                try
+                {
+                    lstDirecciones = (from d in db.DireccionesClientes
+                                      where d.numero_de_cliente == numCliente
+                                      select new DireccionesClientesViewModel
+                                      {
+                                          id_direccion = d.id_direccion,
+                                          numero_de_cliente = d.numero_de_cliente,
+                                          calle = d.calle,
+                                          barrio = d.barrio,
+                                          distrito = d.distrito
+                                      }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                foreach (var direccion in lstDirecciones)
+                {
+                    dtgDirecciones.Rows.Add(new object[] { direccion.calle, direccion.barrio, direccion.distrito, "Eliminar", direccion.id_direccion });
+                }
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            verificarCamposVacios();
+            if (camposCompletos == true)
             {
                 guardarCliente();
                 DialogResult = DialogResult.OK;
@@ -125,9 +223,32 @@ namespace Pedidos
         private void dtgDirecciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != dtgDirecciones.Columns["Op"].Index)
-                return;
+                    return;
 
             dtgDirecciones.Rows.RemoveAt(e.RowIndex);
+            
+        }
+
+        private void frm_Cliente_Load(object sender, EventArgs e)
+        {
+            if (numCliente > 0)
+            {
+                buscarCliente();
+                groupBoxDirecciones.Visible = false;
+                btnGuardar.Visible = false;
+                btnActualizar.Visible = true;
+                existenDirecciones = true;
+            }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            verificarCamposVacios();
+            if (camposCompletos == true)
+            {
+                actualizarCliente();
+                DialogResult = DialogResult.OK;
+            }
         }
     }
 }
