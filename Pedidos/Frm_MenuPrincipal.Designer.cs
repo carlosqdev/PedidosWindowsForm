@@ -74,6 +74,7 @@ namespace Pedidos
             this.verTodosLosClientesToolStripMenuItem.Name = "verTodosLosClientesToolStripMenuItem";
             this.verTodosLosClientesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.verTodosLosClientesToolStripMenuItem.Text = "Ver todos los clientes";
+            this.verTodosLosClientesToolStripMenuItem.Click += new System.EventHandler(this.verTodosLosClientesToolStripMenuItem_Click);
             // 
             // fabricasToolStripMenuItem
             // 

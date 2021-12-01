@@ -16,5 +16,11 @@ namespace Pedidos
         {
             InitializeComponent();
         }
+
+        private void verTodosLosClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_AdministrarClientes frmClientes = new frm_AdministrarClientes();
+            frmClientes.Show();
+        }
     }
 }
