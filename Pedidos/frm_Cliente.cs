@@ -147,36 +147,6 @@ namespace Pedidos
             }
         }
 
-        private void buscarDirecciones()
-        {
-            List<DireccionesClientesViewModel> lstDirecciones = new List<DireccionesClientesViewModel>();
-
-            using (var db = new dbpedidosEntities())
-            {
-                try
-                {
-                    lstDirecciones = (from d in db.DireccionesClientes
-                                      where d.numero_de_cliente == numCliente
-                                      select new DireccionesClientesViewModel
-                                      {
-                                          id_direccion = d.id_direccion,
-                                          numero_de_cliente = d.numero_de_cliente,
-                                          calle = d.calle,
-                                          barrio = d.barrio,
-                                          distrito = d.distrito
-                                      }).ToList();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                foreach (var direccion in lstDirecciones)
-                {
-                    dtgDirecciones.Rows.Add(new object[] { direccion.calle, direccion.barrio, direccion.distrito, "Eliminar", direccion.id_direccion });
-                }
-            }
-        }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             verificarCamposVacios();

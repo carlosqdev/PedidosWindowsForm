@@ -30,11 +30,11 @@ namespace Pedidos
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDirecciones = new System.Windows.Forms.Button();
             this.btnModificarCliente = new System.Windows.Forms.Button();
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgClientes = new System.Windows.Forms.DataGridView();
-            this.btnDirecciones = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgClientes)).BeginInit();
@@ -51,6 +51,17 @@ namespace Pedidos
             this.groupBox1.Size = new System.Drawing.Size(776, 78);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // btnDirecciones
+            // 
+            this.btnDirecciones.Enabled = false;
+            this.btnDirecciones.Location = new System.Drawing.Point(428, 21);
+            this.btnDirecciones.Name = "btnDirecciones";
+            this.btnDirecciones.Size = new System.Drawing.Size(156, 39);
+            this.btnDirecciones.TabIndex = 2;
+            this.btnDirecciones.Text = "Direcciones del cliente";
+            this.btnDirecciones.UseVisualStyleBackColor = true;
+            this.btnDirecciones.Click += new System.EventHandler(this.btnDirecciones_Click);
             // 
             // btnModificarCliente
             // 
@@ -96,16 +107,6 @@ namespace Pedidos
             this.dtgClientes.Size = new System.Drawing.Size(770, 323);
             this.dtgClientes.TabIndex = 0;
             this.dtgClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgClientes_CellDoubleClick);
-            // 
-            // btnDirecciones
-            // 
-            this.btnDirecciones.Enabled = false;
-            this.btnDirecciones.Location = new System.Drawing.Point(428, 21);
-            this.btnDirecciones.Name = "btnDirecciones";
-            this.btnDirecciones.Size = new System.Drawing.Size(156, 39);
-            this.btnDirecciones.TabIndex = 2;
-            this.btnDirecciones.Text = "Direcciones del cliente";
-            this.btnDirecciones.UseVisualStyleBackColor = true;
             // 
             // frm_AdministrarClientes
             // 

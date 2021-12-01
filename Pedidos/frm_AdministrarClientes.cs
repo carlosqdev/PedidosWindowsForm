@@ -61,6 +61,7 @@ namespace Pedidos
             if (numeroCliente > 0)
             {
                 btnModificarCliente.Enabled = true;
+                btnDirecciones.Enabled = true;
             }
         }
 
@@ -79,7 +80,17 @@ namespace Pedidos
             frmCliente.ShowDialog();
             cargarClientes();
             btnModificarCliente.Enabled = false;
+            btnDirecciones.Enabled = false;
             numeroCliente = 0;
+        }
+
+        private void btnDirecciones_Click(object sender, EventArgs e)
+        {
+            frm_DireccionesClientes frmDirecciones = new frm_DireccionesClientes();
+            frmDirecciones.numCliente = numeroCliente;
+            frmDirecciones.ShowDialog();
+            btnDirecciones.Enabled = false;
+            btnModificarCliente.Enabled = false;
         }
     }
 }
