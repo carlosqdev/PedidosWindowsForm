@@ -210,7 +210,8 @@ namespace Pedidos
         #endregion
         private void frm_CrearPedidos_Load(object sender, EventArgs e)
         {
-            
+            CargarComboCliente();
+            cargarComboFabrica();
         }
         
         private void comboClientes_SelectionChangeCommitted(object sender, EventArgs e)
@@ -293,8 +294,6 @@ namespace Pedidos
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            CargarComboCliente();
-            cargarComboFabrica();
             comboClientes.Enabled = true;
             comboFabricas.Enabled = true;
             btnNuevo.Enabled = false;
@@ -316,7 +315,11 @@ namespace Pedidos
             else if (articuloEnLista == false)
                 MessageBox.Show("Debe agregar como minimo un articulo", "Detalle del pedido esta vacio", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
+            {
                 guardarPedido();
+                DialogResult = DialogResult.OK;
+            }
+                
         }
     }
 }

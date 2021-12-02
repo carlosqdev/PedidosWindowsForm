@@ -87,7 +87,7 @@ namespace Pedidos
             // verTodasLasFabricasToolStripMenuItem
             // 
             this.verTodasLasFabricasToolStripMenuItem.Name = "verTodasLasFabricasToolStripMenuItem";
-            this.verTodasLasFabricasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verTodasLasFabricasToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.verTodasLasFabricasToolStripMenuItem.Text = "Ver fabricas";
             this.verTodasLasFabricasToolStripMenuItem.Click += new System.EventHandler(this.verTodasLasFabricasToolStripMenuItem_Click);
             // 
@@ -125,6 +125,7 @@ namespace Pedidos
             this.verTodosLosPedidosToolStripMenuItem.Name = "verTodosLosPedidosToolStripMenuItem";
             this.verTodosLosPedidosToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.verTodosLosPedidosToolStripMenuItem.Text = "Ver todos los pedidos";
+            this.verTodosLosPedidosToolStripMenuItem.Click += new System.EventHandler(this.verTodosLosPedidosToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
