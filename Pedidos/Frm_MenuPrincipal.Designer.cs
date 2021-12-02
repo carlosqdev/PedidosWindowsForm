@@ -104,13 +104,15 @@ namespace Pedidos
             // 
             this.verTodosLosArticulosToolStripMenuItem.Name = "verTodosLosArticulosToolStripMenuItem";
             this.verTodosLosArticulosToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.verTodosLosArticulosToolStripMenuItem.Text = "Ver todos los articulos";
+            this.verTodosLosArticulosToolStripMenuItem.Text = "Crear articulos";
+            this.verTodosLosArticulosToolStripMenuItem.Click += new System.EventHandler(this.verTodosLosArticulosToolStripMenuItem_Click);
             // 
             // asociarArticulosAFabricasToolStripMenuItem
             // 
             this.asociarArticulosAFabricasToolStripMenuItem.Name = "asociarArticulosAFabricasToolStripMenuItem";
             this.asociarArticulosAFabricasToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.asociarArticulosAFabricasToolStripMenuItem.Text = "Asociar articulos a fabricas";
+            this.asociarArticulosAFabricasToolStripMenuItem.Click += new System.EventHandler(this.asociarArticulosAFabricasToolStripMenuItem_Click);
             // 
             // pedidosToolStripMenuItem
             // 

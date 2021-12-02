@@ -34,5 +34,16 @@ namespace Pedidos
             frm_AdministrarPedidos frmPedidos = new frm_AdministrarPedidos();
             frmPedidos.Show();
         }
+
+        private void verTodosLosArticulosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Articulos frmArticulo = new frm_Articulos();
+            frmArticulo.Show();
+        }
+
+        private void asociarArticulosAFabricasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
