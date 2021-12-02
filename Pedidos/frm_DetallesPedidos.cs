@@ -24,17 +24,31 @@ namespace Pedidos
         #region MisMetodos
         private void cargarDetalle()
         {
-            //TODO
+            List<DetallePedidoViewModel> lstDetalle = new List<DetallePedidoViewModel>();
             using (var db = new dbpedidosEntities())
             {
                 try
                 {
-                    //TODO
+                    lstDetalle = (from dp in db.DetallesDePedidos
+                                  from a in db.Articulos
+                                  from f in db.Fabricas
+                                  where dp.numero_de_articulo == a.numero_de_articulo
+                                  where dp.id_fabrica == f.id_fabrica
+                                  where dp.id_pedido == numPedido
+                                  select new DetallePedidoViewModel
+                                  {
+                                      idPedido = dp.id_pedido,
+                                      fabrica = f.nombre_fabrica,
+                                      numeroDeArticulo = dp.numero_de_articulo,
+                                      nombreArticulo = a.descripcion_articulo,
+                                      cantidad = dp.cantidad
+                                  }).ToList();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                dtgDetalle.DataSource = lstDetalle;
             }
         }
         #endregion
@@ -43,7 +57,7 @@ namespace Pedidos
         {
             if (numPedido > 0)
             {
-                //Buscar detalles del pedido                
+                cargarDetalle();               
             }
         }
     }
