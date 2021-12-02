@@ -57,5 +57,11 @@ namespace Pedidos
             frmReporteFabricas rptFabricas = new frmReporteFabricas();
             rptFabricas.Show();
         }
+
+        private void articulosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReporteArticulos rptArticulos = new frmReporteArticulos();
+            rptArticulos.Show();
+        }
     }
 }

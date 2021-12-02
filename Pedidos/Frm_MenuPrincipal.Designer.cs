@@ -159,6 +159,7 @@ namespace Pedidos
             this.articulosToolStripMenuItem1.Name = "articulosToolStripMenuItem1";
             this.articulosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.articulosToolStripMenuItem1.Text = "Articulos";
+            this.articulosToolStripMenuItem1.Click += new System.EventHandler(this.articulosToolStripMenuItem1_Click);
             // 
             // pedidosToolStripMenuItem1
             // 

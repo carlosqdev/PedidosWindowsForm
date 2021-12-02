@@ -117,6 +117,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbpedidosDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmReporteArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReporteArticulos.Designer.cs">
+      <DependentUpon>frmReporteArticulos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmReporteClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     <Compile Include="ViewModel\FabricasViewModel.cs" />
     <Compile Include="ViewModel\FabricaViewModel.cs" />
     <Compile Include="ViewModel\PedidosViewModel.cs" />
+    <EmbeddedResource Include="frmReporteArticulos.resx">
+      <DependentUpon>frmReporteArticulos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReporteClientes.resx">
       <DependentUpon>frmReporteClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +257,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reportes\ReporteArticulos.rdlc" />
     <EmbeddedResource Include="Reportes\ReporteClientes.rdlc" />
     <EmbeddedResource Include="Reportes\ReporteFabricas.rdlc" />
     <EntityDeploy Include="Datos\Model1.edmx">
