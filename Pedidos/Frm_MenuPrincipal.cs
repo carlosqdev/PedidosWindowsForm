@@ -43,7 +43,8 @@ namespace Pedidos
 
         private void asociarArticulosAFabricasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frm_AsociarArticulosConFabricas frmAsociar = new frm_AsociarArticulosConFabricas();
+            frmAsociar.Show();
         }
 
         private void clientesToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -62,6 +63,11 @@ namespace Pedidos
         {
             frmReporteArticulos rptArticulos = new frmReporteArticulos();
             rptArticulos.Show();
+        }
+
+        private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
