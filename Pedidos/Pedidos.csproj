@@ -118,6 +118,12 @@
     <Compile Include="frm_DireccionesClientes.Designer.cs">
       <DependentUpon>frm_DireccionesClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Fabricas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Fabricas.Designer.cs">
+      <DependentUpon>frm_Fabricas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,7 @@
     <Compile Include="ViewModel\ClienteViewModel.cs" />
     <Compile Include="ViewModel\DireccionesClientesViewModel.cs" />
     <Compile Include="ViewModel\DireccionesViewModel.cs" />
+    <Compile Include="ViewModel\FabricasViewModel.cs" />
     <Compile Include="ViewModel\FabricaViewModel.cs" />
     <EmbeddedResource Include="frm_AdministrarClientes.resx">
       <DependentUpon>frm_AdministrarClientes.cs</DependentUpon>
@@ -144,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_DireccionesClientes.resx">
       <DependentUpon>frm_DireccionesClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Fabricas.resx">
+      <DependentUpon>frm_Fabricas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_MenuPrincipal.resx">
       <DependentUpon>Frm_MenuPrincipal.cs</DependentUpon>

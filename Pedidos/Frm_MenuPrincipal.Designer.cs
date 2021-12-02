@@ -89,6 +89,7 @@ namespace Pedidos
             this.verTodasLasFabricasToolStripMenuItem.Name = "verTodasLasFabricasToolStripMenuItem";
             this.verTodasLasFabricasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verTodasLasFabricasToolStripMenuItem.Text = "Ver fabricas";
+            this.verTodasLasFabricasToolStripMenuItem.Click += new System.EventHandler(this.verTodasLasFabricasToolStripMenuItem_Click);
             // 
             // articulosToolStripMenuItem
             // 
@@ -139,25 +140,25 @@ namespace Pedidos
             // clientesToolStripMenuItem1
             // 
             this.clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
-            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.clientesToolStripMenuItem1.Text = "Clientes";
             // 
             // fabricasToolStripMenuItem1
             // 
             this.fabricasToolStripMenuItem1.Name = "fabricasToolStripMenuItem1";
-            this.fabricasToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.fabricasToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.fabricasToolStripMenuItem1.Text = "Fabricas";
             // 
             // articulosToolStripMenuItem1
             // 
             this.articulosToolStripMenuItem1.Name = "articulosToolStripMenuItem1";
-            this.articulosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.articulosToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.articulosToolStripMenuItem1.Text = "Articulos";
             // 
             // pedidosToolStripMenuItem1
             // 
             this.pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
-            this.pedidosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.pedidosToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
             this.pedidosToolStripMenuItem1.Text = "Pedidos";
             // 
             // Frm_MenuPrincipal

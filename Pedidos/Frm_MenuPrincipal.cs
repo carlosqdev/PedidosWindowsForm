@@ -22,5 +22,11 @@ namespace Pedidos
             frm_AdministrarClientes frmClientes = new frm_AdministrarClientes();
             frmClientes.Show();
         }
+
+        private void verTodasLasFabricasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Fabricas frmFabricas = new frm_Fabricas();
+            frmFabricas.Show();
+        }
     }
 }
