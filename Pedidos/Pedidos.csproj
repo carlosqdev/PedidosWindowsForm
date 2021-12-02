@@ -123,6 +123,12 @@
     <Compile Include="frmReporteClientes.Designer.cs">
       <DependentUpon>frmReporteClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReporteFabricas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReporteFabricas.Designer.cs">
+      <DependentUpon>frmReporteFabricas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_AdministrarClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     <EmbeddedResource Include="frmReporteClientes.resx">
       <DependentUpon>frmReporteClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReporteFabricas.resx">
+      <DependentUpon>frmReporteFabricas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_AdministrarClientes.resx">
       <DependentUpon>frm_AdministrarClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -240,6 +249,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Reportes\ReporteClientes.rdlc" />
+    <EmbeddedResource Include="Reportes\ReporteFabricas.rdlc" />
     <EntityDeploy Include="Datos\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>

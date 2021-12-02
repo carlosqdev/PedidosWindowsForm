@@ -45,5 +45,17 @@ namespace Pedidos
         {
 
         }
+
+        private void clientesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReporteClientes rptClientes = new frmReporteClientes();
+            rptClientes.Show();
+        }
+
+        private void fabricasToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmReporteFabricas rptFabricas = new frmReporteFabricas();
+            rptFabricas.Show();
+        }
     }
 }

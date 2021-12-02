@@ -16,7 +16,7 @@ namespace Pedidos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmReporteClientes());
+            Application.Run(new Frm_MenuPrincipal());
         }
     }
 }
